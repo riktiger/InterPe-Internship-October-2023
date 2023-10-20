@@ -34,7 +34,7 @@ with col2:
 
 venue = st.selectbox('Venue',sorted(venues))
 
-target = st.number_input('1st Innings Target Target')
+target = st.number_input('Target')
 
 col3,col4,col5 = st.columns(3)
 
@@ -57,6 +57,8 @@ if st.button('Who Will Win the Match ?'):
 
     result = predictor.predict_proba(input_df)
     loss = result[0][0]
-    win = result[0][1]
-    st.header(batting_team + "- " + str(round(win*100)) + "%")
-    st.header(bowling_team + "- " + str(round(loss*100)) + "%")
+    draw = result[0][1]
+    win = result[0][2]
+    st.header(batting_team + "- " + str(round(win*100,2)) + "%")
+    st.header(bowling_team + "- " + str(round(loss*100,2)) + "%")
+    st.header("Chance of a Super-Over to Settle a Draw " + "- " + str(round(draw*100,2)) + "%")
